@@ -17,8 +17,25 @@ const hamburger = document.querySelector('.hamburger');
 const mobileMenu = document.querySelector('.mobile-menu');
 const barsIcon = document.querySelector('.hamburger i');
 
-cartIcon.addEventListener('click', () => cartTab.classList.add('cart-tab-active'));
-closeBtn.addEventListener('click', () => cartTab.classList.remove('cart-tab-active'));
+cartIcon.addEventListener('click', (e) => {
+    e.preventDefault();
+    cartTab.classList.add('cart-tab-active');
+});
+
+closeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    cartTab.classList.remove('cart-tab-active');
+});
+
+document.addEventListener('click', (e) => {
+    if (
+        cartTab.classList.contains('cart-tab-active') &&
+        !cartTab.contains(e.target) &&
+        !cartIcon.contains(e.target)
+    ) {
+        cartTab.classList.remove('cart-tab-active');
+    }
+});
 hamburger.addEventListener('click',()=>{
     mobileMenu.classList.toggle('mobile-menu-active');
     barsIcon.classList.toggle('fa-bars');
